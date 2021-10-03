@@ -1,21 +1,24 @@
 ---
 # {% avatar Jacobpbrooker  size=200 border="1px"%}
+#![me](/assets/img/stock.jpg)
 layout: page
 title: About
 permalink: /about/
 ---
-![me](/assets/img/stock.jpg)
+<div></div>
 
 <style>
     /* Write your CSS solution here (do not edit the surrounding HTML) */
     .avatar {
-      height: 150px;
-      width: 150px;
+      height: 200px;
+      width: 200px;
       border: 2px solid gray;
       border-radius: 50%;
+      float: right;
     }
 </style> 
+{% avatar Jacobpbrooker size=200 border="1px"%}
 
 
-lady and her emotional support goldfish
+
 

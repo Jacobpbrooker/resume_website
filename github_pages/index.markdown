@@ -8,8 +8,6 @@ Title: "Home Page"
 
 ---
 {{page.Title}} <br>
-
-
-<button name="Test" onclick="www.google.ca">clicktest</button>
-
+<hr>
+another test <br>
 This is a test to see where inside the index page "home" as it is declared this text will pop up
