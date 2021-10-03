@@ -2,10 +2,14 @@
 # {% avatar Jacobpbrooker  size=200 border="1px"%}
 #![me](/assets/img/stock.jpg)
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
-<div></div>
+<div>
+<p style="float:left">
+Enter about me text here. Format or don't as required.
+</p>
+</div>
 
 <style>
     /* Write your CSS solution here (do not edit the surrounding HTML) */
