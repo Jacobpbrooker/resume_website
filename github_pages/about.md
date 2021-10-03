@@ -16,7 +16,8 @@ permalink: /about/
       border-radius: 50%;
       float: right;
     }
-</style> 
+</style>
+
 {% avatar Jacobpbrooker size=200 border="1px"%}
 
 
