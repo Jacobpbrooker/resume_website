@@ -7,7 +7,13 @@ layout: home
 Title: "Home Page"
 
 ---
-{{page.Title}} <br>
-<hr>
-another test <br>
-This is a test to see where inside the index page "home" as it is declared this text will pop up
+<div>
+    <h1><b>{{page.Title}}</b><br></h1>
+    <hr>
+</div>
+
+<div>
+    <p>
+    Below will be posts describing projects I have completed throughout my Undergraduate with any technical details I found interesting or complex. Please enjoy!
+    </p>
+</div>
