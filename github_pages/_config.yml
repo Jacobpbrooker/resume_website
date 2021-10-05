@@ -18,17 +18,18 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Welcome to my Developer and Design Static Showcase 
+title: Jacob Brooker - Project Showcase 
 author: Jacob Brooker
 email: jacobpbrooker@gmail.com
 avatar: "assets/img/stock.jpg" 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
+linkedin_username: jacobpbrooker
 github_username:  Jacobpbrooker
 description: >- # this means to ignore newlines until "baseurl:"
   This static page has been created to showcase various projects and design works
-  to accent and enhance my formal resume and cover letter submitted to potential employers.
+  to accent and enhance my resume and cover letter.
   I hope you enjoy my work.
 #  Write an awesome description for your new site here. You can edit this
 #  line in _config.yml. It will appear in your document head meta (for
