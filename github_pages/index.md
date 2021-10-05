@@ -11,6 +11,12 @@ Title: "Welcome Page"
     <hr>
 </div>
 
+~~~c
+int main() {
+    printf("Hello World\n");
+}
+~~~
+
 <div>
     <p>
     Below will be posts describing projects I have completed throughout my Undergraduate with any technical details I found interesting or complex. Please enjoy!
