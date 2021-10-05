@@ -23,6 +23,9 @@ list_title: "Hello test"
             {{ post.title | escape }}
           </a>
         </h3>
+        <h5 style="text-indent: 30px;">
+          {{post.post_description}}
+        </h5>
         {%- if site.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%}
