@@ -4,8 +4,7 @@
 # ![]({{site.avatar}})
 #<img class="avatar" src="https://goo.gl/khGCrk" alt="avatar" /> <meta charset="utf-8">
 layout: home
-Title: "Home Page"
-
+Title: "Welcome Page"
 ---
 <div>
     <h1><b>{{page.Title}}</b><br></h1>
