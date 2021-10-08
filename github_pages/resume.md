@@ -5,9 +5,6 @@ layout: page
 title: Resume
 permalink: /resume/
 ---
-
-Test resume location
-I should embed the pdf here
 <br>
 <iframe src="/assets/pdf/resume.pdf" width="100%" height="1000px"></iframe>
 <!--

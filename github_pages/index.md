@@ -15,12 +15,15 @@ list_title: "Coding Projects"
 ~~~c++
 #include stdio.h
 #include stdlib.h
+#include stdbool.h
 
 int main(void) {
     bool coop_search = true;
+    char author[13] = "Jacob Brooker";
 
-    if(coop_search)
+    if(coop_search){
         printf("Hello and welcome to my project showcase website!\n");
+        printf("My name is %s\n", author);
         printf("To learn more about various projects from my Github Repository 
                     check out any of my posts below\n");
         printf("To get to know me a little better, check out my \"About Me\" page\n");
