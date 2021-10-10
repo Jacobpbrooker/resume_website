@@ -44,7 +44,7 @@ defaults:
 theme: minima
 plugins:
   - jekyll-feed
-  - jekyll-avatar
+#  - jekyll-avatar
 
 # Exclude from processing.
 # The following items will not be processed, by default.

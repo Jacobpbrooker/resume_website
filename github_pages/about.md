@@ -17,7 +17,7 @@ permalink: /about/
     I hope that we get to meet (safely) soon!
   </p>
 </div>
-<style>
+<!--<style>
     /* Write your CSS solution here (do not edit the surrounding HTML) */
     .avatar {
       height: 200px;
@@ -26,7 +26,7 @@ permalink: /about/
       border-radius: 50%;
       float: right;
     }
-</style>
+</style>-->
 <!--{% avatar Jacobpbrooker size=200 border="1px"%}-->
 
 
