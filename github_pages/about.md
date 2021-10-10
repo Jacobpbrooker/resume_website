@@ -27,7 +27,7 @@ permalink: /about/
       float: right;
     }
 </style>
-{% avatar Jacobpbrooker size=200 border="1px"%}
+<!--{% avatar Jacobpbrooker size=200 border="1px"%}-->
 
 
 
