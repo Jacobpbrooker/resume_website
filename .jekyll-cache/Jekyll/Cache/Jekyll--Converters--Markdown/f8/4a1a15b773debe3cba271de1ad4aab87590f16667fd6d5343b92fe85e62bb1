@@ -1,0 +1,143 @@
+I"K<p>With the rise of COVID, one of the lifestyle changes I miss the most was heading to the gym for a workout. While waiting patiently for the return to normalcy, I decided to make an application that would create a weekly workout routine based on certain muscle selections.</p>
+
+<p>The main reason to complete this project was to practice Object Oriented programming. Specific techniques I wanted to apply during the development were working with enums, working with vector class templates, and data loading from a csv.</p>
+
+<h3>Application Decomposition and Explanation</h3>
+
+<p>First, I set myself a challenge to use enumerated classes as a core data type. I set each of the muscle groups, difficulty, movement, equipment, and targeted aread to an enum class. This allowed me to load the data from a string and use an extremely fast case comparison to return the enum.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="k">class</span> <span class="nc">muscleGroup</span> <span class="p">{</span><span class="n">NONE</span><span class="p">,</span> <span class="n">AbdominalsLower</span><span class="p">,</span> <span class="n">AbdominalsObliques</span><span class="p">,</span> <span class="n">AbdominalsTotal</span><span class="p">,</span> <span class="n">AbdominalsUpper</span><span class="p">,</span> <span class="n">BackLatissimusDorsi</span><span class="p">,</span> <span class="n">BackLatDorsiRhomboids</span><span class="p">,</span> <span class="n">Biceps</span><span class="p">,</span> <span class="n">CalvesGastrocnemius</span><span class="p">,</span> <span class="n">CalvesSoleus</span><span class="p">,</span> <span class="n">ChestPectoralis</span><span class="p">,</span> <span class="n">LegsHamstrings</span><span class="p">,</span> <span class="n">LegsQuadriceps</span><span class="p">,</span> <span class="n">LowerBackErectorSpinae</span><span class="p">,</span> <span class="n">ShouldersDeltsTraps</span><span class="p">,</span> <span class="n">ShouldersRotatorCuff</span><span class="p">,</span> <span class="n">Triceps</span><span class="p">};</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">intensity</span> <span class="p">{</span><span class="n">NONE</span><span class="p">,</span> <span class="n">EASY</span><span class="p">,</span> <span class="n">MEDIUM</span><span class="p">,</span> <span class="n">HARD</span> <span class="p">};</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">PP</span> <span class="p">{</span> <span class="n">NONE</span><span class="p">,</span> <span class="n">PUSH</span><span class="p">,</span> <span class="n">PULL</span><span class="p">};</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">modality</span> <span class="p">{</span> <span class="n">NONE</span><span class="p">,</span> <span class="n">FREEWEIGHT</span><span class="p">,</span> <span class="n">MACHINE</span><span class="p">,</span> <span class="n">CABLES</span><span class="p">,</span> <span class="n">BODYWEIGHT</span><span class="p">};</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">joint</span> <span class="p">{</span> <span class="n">NONE</span><span class="p">,</span> <span class="n">COMPOUND</span><span class="p">,</span> <span class="n">ISOLATION</span><span class="p">};</span>
+</code></pre></div></div>
+<p>The next code technical aspect I set out to accomplish while developing this project is to use a vector list as the containers to hold the exercises. I used a vecotr of exercises that pertained to one specific muscle group, and then created a vector of vectors where all exercises could be stored.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">weeklyProgram</span> <span class="p">{</span>
+	<span class="n">vector</span> <span class="o">&lt;</span><span class="n">excercise</span><span class="o">&gt;</span> <span class="n">weeklyExercises</span><span class="p">;</span>
+<span class="nl">public:</span>
+	<span class="kt">void</span> <span class="n">makeProgram</span><span class="p">(</span><span class="n">excerciseList</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">muscleGroup</span><span class="o">&gt;</span><span class="p">);</span>
+	<span class="kt">void</span> <span class="n">displayProgram</span><span class="p">();</span>
+<span class="p">};</span>
+
+</code></pre></div></div>
+
+<p>The last code block I would like to demonstrate is how the the exercises are loaded into the application through a csv file. Essentially, every line is loaded into from the csv and the comma’s are used to determine location of different data sections. As the csv contents are loading in as a string, I needed to use a string to enum to convert the data to be usable by the exercise object. The exercise object is given all the data as arguments and the object is created. Finally, a switch case is used to determine which vector the exercise will be attached too.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">excerciseList</span><span class="o">::</span><span class="n">loadExcercises</span><span class="p">(</span><span class="n">string</span> <span class="n">fileName</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">fstream</span> <span class="n">fin</span><span class="p">;</span>
+	<span class="n">fin</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">fin</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span>
+	<span class="p">{</span>
+		<span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">fin</span><span class="p">.</span><span class="n">eof</span><span class="p">())</span>														<span class="c1">// do work here creating objects in loop and pushing to vector list</span>
+		<span class="p">{</span>
+			<span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+			<span class="n">getline</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>													<span class="c1">// get the entire line and then will need to parse data to create the objects needed</span>
+
+			<span class="n">istringstream</span> <span class="n">issLine</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+			<span class="n">string</span> <span class="n">muscleGRP</span><span class="p">;</span>
+			<span class="n">string</span> <span class="n">exc</span><span class="p">;</span>
+			<span class="n">string</span> <span class="n">lvl</span><span class="p">;</span>
+			<span class="n">string</span> <span class="n">pushp</span><span class="p">;</span>
+			<span class="n">string</span> <span class="n">modi</span><span class="p">;</span>
+			<span class="n">string</span> <span class="n">jnt</span><span class="p">;</span>
+									
+			<span class="n">getline</span><span class="p">(</span><span class="n">issLine</span><span class="p">,</span> <span class="n">muscleGRP</span><span class="p">,</span> <span class="sc">','</span><span class="p">);</span>									<span class="c1">// parse the data and covert to enum class values</span>
+			<span class="n">getline</span><span class="p">(</span><span class="n">issLine</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="sc">','</span><span class="p">);</span>
+			<span class="n">getline</span><span class="p">(</span><span class="n">issLine</span><span class="p">,</span> <span class="n">lvl</span><span class="p">,</span> <span class="sc">','</span><span class="p">);</span>
+			<span class="n">getline</span><span class="p">(</span><span class="n">issLine</span><span class="p">,</span> <span class="n">pushp</span><span class="p">,</span> <span class="sc">','</span><span class="p">);</span>
+			<span class="n">getline</span><span class="p">(</span><span class="n">issLine</span><span class="p">,</span> <span class="n">modi</span><span class="p">,</span> <span class="sc">','</span><span class="p">);</span>
+			<span class="n">getline</span><span class="p">(</span><span class="n">issLine</span><span class="p">,</span> <span class="n">jnt</span><span class="p">);</span>
+
+			<span class="n">muscleGroup</span> <span class="n">m_grp</span> <span class="o">=</span> <span class="n">stringToMuscleGroup</span><span class="p">(</span><span class="n">muscleGRP</span><span class="p">);</span>					
+			<span class="n">intensity</span> <span class="n">i_ty</span> <span class="o">=</span> <span class="n">stringToIntensity</span><span class="p">(</span><span class="n">lvl</span><span class="p">);</span>
+			<span class="n">PP</span> <span class="n">p_p</span> <span class="o">=</span> <span class="n">stringToPushPull</span><span class="p">(</span><span class="n">pushp</span><span class="p">);</span>
+			<span class="n">modality</span> <span class="n">m_ty</span> <span class="o">=</span> <span class="n">stringToModality</span><span class="p">(</span><span class="n">modi</span><span class="p">);</span>
+			<span class="n">joint</span> <span class="n">j_nt</span> <span class="o">=</span> <span class="n">stringToJoint</span><span class="p">(</span><span class="n">jnt</span><span class="p">);</span>
+									
+			<span class="n">excercise</span> <span class="n">excer</span><span class="p">(</span><span class="n">m_grp</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="s">"N/A"</span><span class="p">,</span> <span class="n">i_ty</span><span class="p">,</span> <span class="n">p_p</span><span class="p">,</span> <span class="n">m_ty</span><span class="p">,</span> <span class="n">j_nt</span><span class="p">,</span> <span class="o">++</span><span class="n">excerciseCounter</span><span class="p">);</span>  <span class="c1">// create the excercise object </span>
+			
+			<span class="k">switch</span> <span class="p">(</span><span class="n">excer</span><span class="p">.</span><span class="n">getMuscles</span><span class="p">())</span>
+			<span class="p">{</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">NONE</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">NONE</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">AbdominalsLower</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">AbLow</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">AbdominalsObliques</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">AbObl</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">AbdominalsTotal</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">AbTot</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">AbdominalsUpper</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">AbUpp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">BackLatissimusDorsi</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">BackLatDor</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">BackLatDorsiRhomboids</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">BackLatRhom</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">Biceps</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">Bic</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">CalvesGastrocnemius</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">CalGas</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">CalvesSoleus</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">CalSol</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">ChestPectoralis</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">ChestPec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">LegsHamstrings</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">LegHam</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">LegsQuadriceps</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">LegQuad</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">LowerBackErectorSpinae</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">LowBack</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">ShouldersDeltsTraps</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">ShouldDelt</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">ShouldersRotatorCuff</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">ShouldRot</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="k">case</span> <span class="n">muscleGroup</span><span class="o">::</span><span class="n">Triceps</span><span class="p">:</span>
+				<span class="k">this</span><span class="o">-&gt;</span><span class="n">Tric</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">excer</span><span class="p">);</span>
+				<span class="k">break</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Failed to open file - "</span> <span class="o">&lt;&lt;</span> <span class="n">fileName</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3>Running the Application</h3>
+<p>First, the main menu of selection is displayed to the console.
+<br /><br />
+<img src="/assets/img/programs/fitnessmain.png" height="300px" />
+<br /><br />
+Next, the user makes a selection of the muscle group, and the amount of exercises they would like of that muscle group.<br />
+<img src="/assets/img/programs/fitnessselection1.PNG" height="300px" />
+<br /><br />
+Another user selection, this time with more than one exercise requested.
+<img src="/assets/img/programs/fitnessselection2.png" height="300px" />
+<br /><br />
+Lastly, the program is exited, and the user is presented with a custom exercise program!
+<img src="/assets/img/programs/fitnessresults.png" height="300px" />
+<br /><br /></p>
+<hr />
+
+<h3><a href="https://github.com/Jacobpbrooker/fitnessProgramPlanner">You can find the GitHub Repo here!</a></h3>
+<p><br />
+If you have any questions at all, please do not hesitate to reach out. Thanks for reading!</p>
+:ET
