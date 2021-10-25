@@ -1,0 +1,120 @@
+<div>
+	<p description="About Binary Trees">
+	In this section I will discuss the creation of my Binary Search Tree (BST) Algorithm. A BST is best used to store data in organized way that allows for relatively quick search, insert, and deletes. Most commonly, BST can be used as quick index lookup tables.
+	<br /><br />
+	One of the major benefits of the BST is the algorithmic complexity Big O notation of the various functions. As the BST is organized, the search function maintains an O(height) linear complexity while the delete and insert functions generally maintain a O(n complexity).
+	</p>
+</div>
+
+<h3><br />Application Decomposition and Explanation</h3>
+
+<p>The appplication uses one struct as both the container for the data and the pointers to the child nodes.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="nc">treeNode</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="nc">treeNode</span><span class="o">*</span> <span class="n">pLeft</span><span class="p">;</span>
+	<span class="k">struct</span> <span class="nc">treeNode</span><span class="o">*</span> <span class="n">pRight</span><span class="p">;</span>
+<span class="p">}</span><span class="n">TREENODE</span><span class="p">,</span> <span class="o">*</span><span class="n">PTREENODE</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The first step in the application building the binary tree is to create a node. All nodes created by this function store a randomly generated int as the data, and set the children nodes to default.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PTREENODE</span> <span class="nf">createNewNode</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">PTREENODE</span> <span class="n">newNode</span> <span class="o">=</span> <span class="p">(</span><span class="n">PTREENODE</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">TREENODE</span><span class="p">));</span>			<span class="c1">// create a new node and malloc</span>
+	
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">newNode</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Failed to malloc newNode</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+		<span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="n">newNode</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">100</span><span class="p">;</span>										<span class="c1">// random number generator of data</span>
+	<span class="n">newNode</span><span class="o">-&gt;</span><span class="n">pLeft</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>												<span class="c1">// set left</span>
+	<span class="n">newNode</span><span class="o">-&gt;</span><span class="n">pRight</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>												<span class="c1">// set right to null</span>
+	<span class="k">return</span> <span class="n">newNode</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Within the main function, I call the create node function to make the root of the tree. To make the code more readable, I typedef a pointer to make the custom struct naed “root”.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="nc">treeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">;</span>
+
+<span class="n">root</span> <span class="n">tree</span> <span class="o">=</span> <span class="n">createNewNode</span><span class="p">();</span>	
+</code></pre></div></div>
+<p>To create the binary tree, we insert each node into the tree. To accomplish this, I decided to write the insert function through recursive calls to the left or right children.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">insert</span><span class="p">(</span><span class="n">PTREENODE</span> <span class="n">currentNode</span><span class="p">,</span> <span class="n">PTREENODE</span> <span class="n">newNode</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">currentNode</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span>								<span class="c1">// is newNode data less than current node?</span>
+	<span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">currentNode</span><span class="o">-&gt;</span><span class="n">pLeft</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>									<span class="c1">// is the pointer to left of node empty?</span>
+			<span class="n">currentNode</span><span class="o">-&gt;</span><span class="n">pLeft</span> <span class="o">=</span> <span class="n">newNode</span><span class="p">;</span>								<span class="c1">// if it is then attach newNode to left of currentNode</span>
+		<span class="k">else</span>
+			<span class="n">insert</span><span class="p">(</span><span class="n">currentNode</span><span class="o">-&gt;</span><span class="n">pLeft</span><span class="p">,</span> <span class="n">newNode</span><span class="p">);</span>						<span class="c1">// else call again with node to the left</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">newNode</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&gt;</span> <span class="n">currentNode</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span>							<span class="c1">// is newNode data greater than current node?</span>
+	<span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">currentNode</span><span class="o">-&gt;</span><span class="n">pRight</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>								<span class="c1">// is the pointer to right of node empty?</span>
+			<span class="n">currentNode</span><span class="o">-&gt;</span><span class="n">pRight</span> <span class="o">=</span> <span class="n">newNode</span><span class="p">;</span>								<span class="c1">// attach newNode to right of node</span>
+		<span class="k">else</span>
+			<span class="n">insert</span><span class="p">(</span><span class="n">currentNode</span><span class="o">-&gt;</span><span class="n">pRight</span><span class="p">,</span> <span class="n">newNode</span><span class="p">);</span>						<span class="c1">// else call again with node to the right</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Now I want to explain three functions I created with the Binary Tree. The first is the search for node function. Passed into this function is the pointer to the root of the tree, and the integer we are searching for. To create a more readable solution, the function is written as a recusive algorithm that will follow a path by comparing the search integer to the integer in the current node. If the search node is less than the node integer, we recursively call with the left child node. If the search node is greater than the current node integer, we recusrively call the search function with the right child node.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PTREENODE</span> <span class="nf">search</span><span class="p">(</span><span class="n">PTREENODE</span> <span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">searchNode</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> 
+		<span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>													<span class="c1">// exit condition, search not found</span>
+	
+	<span class="k">if</span> <span class="p">(</span><span class="n">searchNode</span> <span class="o">==</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span>										<span class="c1">// search found, returning node</span>
+	<span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"Node searched %d, Node returned - "</span><span class="p">,</span> <span class="n">searchNode</span><span class="p">);</span>
+		<span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">searchNode</span> <span class="o">&lt;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span>									<span class="c1">// search int is lower than current node - move left</span>
+		<span class="n">search</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">pLeft</span><span class="p">,</span> <span class="n">searchNode</span><span class="p">);</span>
+	<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">searchNode</span> <span class="o">&gt;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">)</span>									<span class="c1">// search int is higher than current node - move right</span>
+		<span class="n">search</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">pRight</span><span class="p">,</span> <span class="n">searchNode</span><span class="p">);</span>
+
+	
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Next, I will demonstrate my function to count the number of nodes on the binary search tree. This function once again works on recursion. First we will follow the tree through the left (less than parent) child nodes. As we work our way back up, the right (greater than parent) child nodes are counted. Finally, we add one to account for the root of the tree.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">countNodes</span><span class="p">(</span><span class="n">PTREENODE</span> <span class="n">node</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>													<span class="c1">// if node is NULL then there is no list and return 0</span>
+		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
+	<span class="k">return</span><span class="p">(</span><span class="n">countNodes</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">pLeft</span><span class="p">)</span> <span class="o">+</span> <span class="n">countNodes</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">pRight</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>		<span class="c1">// recursively count the number of nodes to the left and to the right</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Lastly, I would like to demonstrate the funciton to calculate the height of the binary search tree. This is an important function as the complexity of the BST can be determined by the height of the tree. This function works by recusively calculating the height of the left pathways, then recursively calculating the height of the right pathways. It then determines which path is the longest, adds one to account for root node, and then returns the greater of the two.</p>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">treeHeight</span><span class="p">(</span><span class="n">PTREENODE</span> <span class="n">node</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">leftHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span>	<span class="n">rightHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+	<span class="kt">int</span> <span class="n">returnHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> 
+		<span class="k">return</span> <span class="n">returnHeight</span><span class="p">;</span>											<span class="c1">// no list, return 0</span>
+	
+	<span class="n">leftHeight</span> <span class="o">=</span> <span class="n">treeHeight</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">pLeft</span><span class="p">);</span>								<span class="c1">// recursive call again left</span>
+
+	<span class="n">rightHeight</span> <span class="o">=</span> <span class="n">treeHeight</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">pRight</span><span class="p">);</span>								<span class="c1">// recursive call again right</span>
+
+	<span class="k">if</span> <span class="p">(</span><span class="n">leftHeight</span> <span class="o">&gt;</span> <span class="n">rightHeight</span><span class="p">)</span>										<span class="c1">// check which height is longer, left or right</span>
+		<span class="n">returnHeight</span> <span class="o">=</span> <span class="n">leftHeight</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>									<span class="c1">// return height of left, the +1 is to account for the head</span>
+	<span class="k">else</span>
+		<span class="n">returnHeight</span> <span class="o">=</span> <span class="n">rightHeight</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>									<span class="c1">// return height of right the +1 is to account for the head</span>
+	
+	<span class="k">return</span> <span class="n">returnHeight</span><span class="p">;</span>												<span class="c1">// return the height of the tree</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><br /></p>
+<h3>Running the Application</h3>
+<p>First, the application will conduct an inorder traversal of the tree. Next, the application calls the search function and returns the tree node. It then calculates the height of the tree, and the total number of nodes inside the tree.
+ <br /><br />
+<img src="/assets/img/programs/bst.png" height="300px" />
+<br /><br /></p>
+<hr />
+
+<h3><a href="https://github.com/Jacobpbrooker/binary_tree">You can find the GitHub Repo here!</a></h3>
+<p><br />
+If you have any questions at all, please do not hesitate to reach out. Thanks for reading!</p>
