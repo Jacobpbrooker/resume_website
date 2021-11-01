@@ -128,7 +128,7 @@ int treeHeight(PTREENODE node)
  <br><br>
  <!--<link rel="shortcut icon" type="image/png" href="\assets\img\banana.png"> -->
 <!--<img type="image/png" src="\assets\img\programs\bst.PNG" height="300px">-->
-<img src="{{site.url}}/{{ site.baseurl }}/assets/img/programs/bst.PNG" height="300px">
+<img src="{{site.url}}{{ site.baseurl }}/assets/img/bst.PNG" height="300px">
 <br><br>
 <hr>
 
