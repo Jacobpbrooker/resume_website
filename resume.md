@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Resume
-permalink: /resume1/
+permalink: /resume/
 ---
 <br>
 <iframe src="{{site.url}}{{ site.baseurl }}/assets/resume.pdf" width="100%" height="1000px"></iframe>
