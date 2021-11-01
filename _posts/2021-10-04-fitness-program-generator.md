@@ -3,7 +3,7 @@ layout: post
 title:  "Fitness Program Generator in C++"
 date:   2021-10-07 15:43:03 -0400
 categories: jekyll update
-post_description: This is a program made to create a custom fitness program, includes specific muscle targets and avoidence. This program was written using Object Oriented C++.
+post_description: This is a program made to create a custom fitness program, includes specific muscle targets and avoidance. This program was written using Object Oriented C++.
 ---
 With the rise of COVID, one of the lifestyle changes I miss the most was heading to the gym for a workout. While waiting patiently for the return to normalcy, I decided to make an application that would create a weekly workout routine based on certain muscle selections. 
 
@@ -20,11 +20,11 @@ enum class PP { NONE, PUSH, PULL};
 enum class modality { NONE, FREEWEIGHT, MACHINE, CABLES, BODYWEIGHT};
 enum class joint { NONE, COMPOUND, ISOLATION};
 ~~~
-The next code technical aspect I set out to accomplish while developing this project is to use a vector list as the containers to hold the exercises. I used a vecotr of exercises that pertained to one specific muscle group, and then created a vector of vectors where all exercises could be stored.
+The next code technical aspect I set out to accomplish while developing this project is to use a vector list as the containers to hold the exercises. I used a vector of exercises that pertained to one specific muscle group, and then created a vector of vectors where all exercises could be stored.
 
 ~~~c++
 class weeklyProgram {
-	vector <excercise> weeklyExercises;
+	vector <exercise> weeklyExercises;
 public:
 	void makeProgram(excerciseList, vector<muscleGroup>);
 	void displayProgram();

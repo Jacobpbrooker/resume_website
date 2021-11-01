@@ -7,11 +7,11 @@ post_description: This is a Restaurant and Recipe selector console based applica
 ---
 Recipedia (no affiliation with the wiki variety) is a console application written in C for a practical project course as part of the BCS. For Recipedia I developed the data structures, linked lists, data reading, and data writing.
 
-I wanted to develop a file system that would allow each restaurant to have its own folder logically seperated in its own file path. Inside each restaurant I wanted to have seperate text files that would each contain seperate information. One text file for the restaurant information, one text file that contained the ingredients for the restaurants specialty menu item, and one text file that contained the instructions for cooking the specialty menu item. 
+I wanted to develop a file system that would allow each restaurant to have its own folder logically separated in its own file path. Inside each restaurant I wanted to have separate text files that would each contain separate information. One text file for the restaurant information, one text file that contained the ingredients for the restaurants specialty menu item, and one text file that contained the instructions for cooking the specialty menu item. 
 
 This way, as the restaurant list changes, or decides to switch specialty entree's the file paths do not need to be changed. Only the information inside the text file would need to be updated.
 
-To accomplish this task, each restaurant was saved in a linked list format, with each node in the linked list acting as the head of a queue for the ingredients, and the head of the queue for the intructions as well.
+To accomplish this task, each restaurant was saved in a linked list format, with each node in the linked list acting as the head of a queue for the ingredients, and the head of the queue for the instructions as well.
 
 <h3>Application Decomposition and Explanation</h3>
 First, I will go over the custom structures that are used in the Recipedia! project that I created.

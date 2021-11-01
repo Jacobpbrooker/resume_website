@@ -10,7 +10,7 @@ A queue created in C is a form of abstract data type that can be created using a
 
 <h3>Application Decomposition and Explanation</h3>
 
-The appplication uses three structs as part of the data storage. The first is a simple patient struct that contains the age and ID number. The next struct makes the individual node of the queue. Each of these nodes contains a single patient, and a pointer to the next node in the queue. The final struct used in the application stores the head and tail of the queue. This allows for forward and reverse traversal of the queue.
+The application uses three structs as part of the data storage. The first is a simple patient struct that contains the age and ID number. The next struct makes the individual node of the queue. Each of these nodes contains a single patient, and a pointer to the next node in the queue. The final struct used in the application stores the head and tail of the queue. This allows for forward and reverse traversal of the queue.
 ~~~c++
 typedef struct patient {
 	int patientNumber;
@@ -91,7 +91,7 @@ bool enqueue(PQUEUE queue, PNODE node)
 	return returnBool;			// return bool
 }
 ~~~
-Next, we are going to look at the traversal functions. To move through the queue, I chose to use a recursive function that looked through the queue front to back, and had a seperate recursive function that moved back to front.
+Next, we are going to look at the traversal functions. To move through the queue, I chose to use a recursive function that looked through the queue front to back, and had a separate recursive function that moved back to front.
 ~~~c++
 void traverse(PQUEUE queue)									// pass the queue to a traversal function
 {
