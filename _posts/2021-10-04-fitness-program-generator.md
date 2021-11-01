@@ -134,16 +134,16 @@ void excerciseList::loadExcercises(string fileName)
 <h3>Running the Application</h3>
 First, the main menu of selection is displayed to the console.
 <br><br>
-<img src="/assets/img/programs/fitnessmain.png" height="300px">
+<img src="{{site.url}}{{ site.baseurl }}/assets/img/fitnessmain.png" height="300px">
 <br><br>
 Next, the user makes a selection of the muscle group, and the amount of exercises they would like of that muscle group.<br>
-<img src="/assets/img/programs/fitnessselection1.PNG" height="300px">
+<img src="{{site.url}}{{ site.baseurl }}/assets/img/fitnessselection1.PNG" height="300px">
 <br><br>
 Another user selection, this time with more than one exercise requested.
-<img src="/assets/img/programs/fitnessselection2.png" height="300px">
+<img src="{{site.url}}{{ site.baseurl }}/assets/img/fitnessselection2.png" height="300px">
 <br><br>
 Lastly, the program is exited, and the user is presented with a custom exercise program!
-<img src="/assets/img/programs/fitnessresults.png" height="300px">
+<img src="{{site.url}}{{ site.baseurl }}/assets/img/fitnessresults.png" height="300px">
 <br><br>
 <hr>
 

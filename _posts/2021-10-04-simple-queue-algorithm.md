@@ -148,7 +148,7 @@ void dequeue(PQUEUE queue)
 <h3>Running the Application</h3>
 The main function of the application accepts a command line argument for the number of patients that will be created by the system. In this example, I instructed the application to create 5 patients, enqueue these nodes, traverse the code forwards and backwards, and then dequeue these patient nodes to end the program.
 
-<img src="/assets/img/programs/queue.png" height="500px">
+<img src="{{site.url}}{{ site.baseurl }}/assets/img/queue.png" height="500px">
 <br><br>
 <hr>
 
