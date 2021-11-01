@@ -126,7 +126,7 @@ int treeHeight(PTREENODE node)
 <h3>Running the Application</h3>
  First, the application will conduct an inorder traversal of the tree. Next, the application calls the search function and returns the tree node. It then calculates the height of the tree, and the total number of nodes inside the tree.
  <br><br>
-<img src="/assets/img/programs/bst.png" height="300px">
+<img src="assets\img\programs\bst.png" height="300px">
 <br><br>
 <hr>
 
