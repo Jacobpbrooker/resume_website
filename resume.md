@@ -1,9 +1,7 @@
 ---
-# {% avatar Jacobpbrooker  size=200 border="1px"%}
-#![me](/assets/img/stock.jpg)
 layout: page
 title: Resume
-permalink: /resume/
+permalink: /resume1/
 ---
 <br>
 <iframe src="{{site.url}}{{ site.baseurl }}/assets/resume.pdf" width="100%" height="1000px"></iframe>
