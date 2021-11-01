@@ -6,7 +6,7 @@ title: Resume
 permalink: /resume/
 ---
 <br>
-<iframe src="/assets/pdf/resume.pdf" width="100%" height="1000px"></iframe>
+<iframe src="{{site.url}}{{ site.baseurl }}/assets/resume.pdf" width="100%" height="1000px"></iframe>
 <!--
 <div id="adobe-dc-view" style="height: 360px; width: 500px;"></div>
 <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
